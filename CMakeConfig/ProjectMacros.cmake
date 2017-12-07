@@ -1,9 +1,9 @@
-SET(CCOSEXAMPLEPROJECT_CMAKECONFIG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CMakeConfig)
+SET(CCDHCPSERVER_CMAKECONFIG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CMakeConfig)
 
 ################################################################################
 # Setup default installation targets for a project
 ################################################################################
-MACRO (CcOSExampleProjectSetInstall ProjectName )
+MACRO (CcDhcpServerSetInstall ProjectName )
   set_property( TARGET ${ProjectName} APPEND PROPERTY INTERFACE_INCLUDE_DIRECTORIES
                 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR};${CMAKE_CURRENT_BINARY_DIR}>
               )
@@ -33,7 +33,7 @@ ENDMACRO()
 ################################################################################
 # Add Xml Configurations to cmake install
 ################################################################################
-MACRO (CcOSExampleProjectSetInstallConfig ProjectName )
+MACRO (CcDhcpServerSetInstallConfig ProjectName )
   INSTALL( DIRECTORY    ${CMAKE_CURRENT_SOURCE_DIR}/config/
            DESTINATION  config/${ProjectName}
            PATTERN "*.xml" )
@@ -45,14 +45,14 @@ ENDMACRO()
 MACRO (CcSetOSVersion ProjectName )
   SET_TARGET_PROPERTIES(  ${ProjectName}
                           PROPERTIES
-                          VERSION ${CCOSEXAMPLEPROJECT_VERSION_CMAKE}
-                          SOVERSION ${CCOSEXAMPLEPROJECT_VERSION_CMAKE})
+                          VERSION ${CCDHCPSERVER_VERSION_CMAKE}
+                          SOVERSION ${CCDHCPSERVER_VERSION_CMAKE})
 ENDMACRO()
 
 ################################################################################
-# Setup Include Directorys for importing CcOSExampleProject
+# Setup Include Directorys for importing CcDhcpServer
 ################################################################################
-MACRO( CcOSExampleProjectTargetIncludeDirs ProjectName )
+MACRO( CcDhcpServerTargetIncludeDirs ProjectName )
   foreach(DIR ${ARGN})
     LIST(APPEND DIRS ${DIR} )
     target_include_directories(${ProjectName} PUBLIC $<BUILD_INTERFACE:${DIR}> )
@@ -65,17 +65,17 @@ ENDMACRO()
 ################################################################################
 # Generate RC-File for MSVC Builds, output is a Version.h File in current dir
 ################################################################################
-MACRO( CcOSExampleProjectGenerateRcFileToCurrentDir ProjectName )
+MACRO( CcDhcpServerGenerateRcFileToCurrentDir ProjectName )
   SET(PROJECT_NAME "${ProjectName}")
-  configure_file( ${CCOSEXAMPLEPROJECT_CMAKECONFIG_DIR}/InputFiles/ProjectVersion.rc.in ${CMAKE_CURRENT_SOURCE_DIR}/CcOSExampleProjectVersion.rc.tmp @ONLY)
-  CcCopyFile(${CMAKE_CURRENT_SOURCE_DIR}/CcOSExampleProjectVersion.rc.tmp ${CMAKE_CURRENT_SOURCE_DIR}/CcOSExampleProjectVersion.rc)
+  configure_file( ${CCDHCPSERVER_CMAKECONFIG_DIR}/InputFiles/ProjectVersion.rc.in ${CMAKE_CURRENT_SOURCE_DIR}/CcDhcpServerVersion.rc.tmp @ONLY)
+  CcCopyFile(${CMAKE_CURRENT_SOURCE_DIR}/CcDhcpServerVersion.rc.tmp ${CMAKE_CURRENT_SOURCE_DIR}/CcDhcpServerVersion.rc)
 ENDMACRO()
 
 ################################################################################
-# Rename Endings of Project output file to CcOSExampleProject default.
+# Rename Endings of Project output file to CcDhcpServer default.
 # CURRENTLY NOT IN USE!!
 ################################################################################
-MACRO( CcOSExampleProjectProjectNaming ProjectName )
+MACRO( CcDhcpServerProjectNaming ProjectName )
   set_target_properties(${ProjectName} PROPERTIES OUTPUT_NAME "${ProjectName}" )
   # Debug becomes and d at the end.
   set_target_properties(${ProjectName} PROPERTIES OUTPUT_NAME_DEBUG "${ProjectName}d" )

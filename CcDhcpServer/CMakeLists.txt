@@ -1,5 +1,5 @@
 
-set ( CURRENT_PROJECT CcOSExampleProject )
+set ( CURRENT_PROJECT CcDhcpServer )
 
 ########
 # Add Source Files
@@ -13,8 +13,8 @@ file (GLOB SOURCE_FILES
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
                      
 if(WINDOWS)
-  CcOSExampleProjectGenerateRcFileToCurrentDir(${CURRENT_PROJECT})
-  list(APPEND SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/CcOSExampleProjectVersion.rc")
+  CcDhcpServerGenerateRcFileToCurrentDir(${CURRENT_PROJECT})
+  list(APPEND SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/CcDhcpServerVersion.rc")
 endif()
 
 add_executable( ${CURRENT_PROJECT} ${SOURCE_FILES} )
@@ -31,4 +31,4 @@ target_link_libraries ( ${CURRENT_PROJECT} LINK_PUBLIC
 #################
 # Post configuration steps
 #################
-CcOSExampleProjectSetInstall( ${CURRENT_PROJECT} )
+CcDhcpServerSetInstall( ${CURRENT_PROJECT} )

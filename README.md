@@ -1,24 +1,8 @@
-# CcOSExampleProject
+# CcDhcpServer
 
 Project wich is based on CcOS.
 
-Target of this Project is to have an project wich can be copied 
-and after simply relplace of "CcOSExampleProject" with new "ProjectName", 
-a new project is born.
-
-All CcOS based Project will be created with this as basic model, for keep
-projects more compareable and easer to maintain. Changes here will later added
-to other projects too.
-
-# Create new Project from Example
-
-This has to be done to create a new Project named "NewProject"
-- Clone CcOSExampleProject to "NewProject" root directory
-- Rename Folder "CcOSExampleProject" to "NewProject" in root directory
-- Rename case sensitive "CcOSExampleProject" to "NewProject" in all files.
-- Rename case sensitive "CCOSEXAMPLEPROJECT" to "NEWPROJECT" in all files. 
-
-# Build CcOSExampleProject
+# Build CcDhcpServer
 
 A little overview:
 * Language: c++11
@@ -35,7 +19,7 @@ Execute following to get a Solution:
     cd Tools
     CmakeVS2013.x64.bat
     cd ..\Solution
-    CcOSExampleProject.sln
+    CcDhcpServer.sln
     
 ## Build on Linux
 
@@ -56,5 +40,5 @@ Here an example:
 
 ## Licence
 
-Author of CcOSExampleProject-Framework: (Andreas Dirmeier)[http://adirmeier.de]
+Author of CcDhcpServer-Framework: [Andreas Dirmeier](http://adirmeier.de)
 This application is licenced under LGPL v3. Look at COPYING and COPYING.LESSER for further information.

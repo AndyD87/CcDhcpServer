@@ -1,5 +1,5 @@
 # @Author Andreas Dirmeier
-# @brief Main CMakeList.txt for CcOSExampleProject
+# @brief Main CMakeList.txt for CcDhcpServer
 #############
 cmake_minimum_required (VERSION 3.0)
 
@@ -11,47 +11,47 @@ include( ${CMAKE_CURRENT_SOURCE_DIR}/CMakeConfig/CcMacros.cmake )
 include( ${CMAKE_CURRENT_SOURCE_DIR}/CMakeConfig/ProjectMacros.cmake )
 
 if(WINDOWS)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files/CcOSExampleProject")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files/CcDhcpServer")
 endif()
 
 ################################################################################
 # Configuration is done, setup Project
 ################################################################################
-project("CcOSExampleProject" VERSION "${CCOSEXAMPLEPROJECT_VERSION_CMAKE}")
+project("CcDhcpServer" VERSION "${CCDHCPSERVER_VERSION_CMAKE}")
 
 ################################################################################
 # Setup Debug
 ################################################################################
 if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
   message("Build-Type set to ${CMAKE_BUILD_TYPE}")
-  set(CCOSEXAMPLEPROJECT_BUILD_TYPE "DEBUG" )
+  set(CCDHCPSERVER_BUILD_TYPE "DEBUG" )
   set(CMAKE_VERBOSE_MAKEFILE          ON)
 else()
   message("Build-Type set to release")
-  set(CCOSEXAMPLEPROJECT_BUILD_TYPE "RELEASE" )
+  set(CCDHCPSERVER_BUILD_TYPE "RELEASE" )
 endif()
 
 ################################################################################
 # Setup Output Paths
 ################################################################################
-# To be able to overwrite global output root use -DCCOSEXAMPLEPROJECT_OUTPUT_DIR=/path on configuration
-if(NOT CCOSEXAMPLEPROJECT_OUTPUT_DIR)
-  set(CCOSEXAMPLEPROJECT_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Output")
+# To be able to overwrite global output root use -DCCDHCPSERVER_OUTPUT_DIR=/path on configuration
+if(NOT CCDHCPSERVER_OUTPUT_DIR)
+  set(CCDHCPSERVER_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Output")
 endif()
 
 # Set runtime output dir to root/output if no other location was defined
 if(NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY)
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CCOSEXAMPLEPROJECT_OUTPUT_DIR}/bin")
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CCDHCPSERVER_OUTPUT_DIR}/bin")
 endif()
 
 # Set library output dir to root/output if no other location was defined
 if(NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY)
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CCOSEXAMPLEPROJECT_OUTPUT_DIR}/lib")
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CCDHCPSERVER_OUTPUT_DIR}/lib")
 endif()
 
 # Set archive output dir to root/output if no other location was defined
 if(NOT CMAKE_ARCHIVE_OUTPUT_DIRECTORY)
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CCOSEXAMPLEPROJECT_OUTPUT_DIR}/lib/static")
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CCDHCPSERVER_OUTPUT_DIR}/lib/static")
 endif()
 
 CcNoConfigurationDirs()
@@ -63,7 +63,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 ################################################################################
 include(CcOSImport.cmake)
 
-ADD_SUBDIRECTORY(CcOSExampleProject)
+ADD_SUBDIRECTORY(CcDhcpServer)
 
 ################################################################################
 # Update dokumentation
@@ -72,7 +72,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Documents/Doxygen)
 
 
 set(CPACK_PACKAGE_DESCRIPTION         ${CMAKE_PROJECT})
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "CcOSExampleProject Project")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "CcDhcpServer Project")
 set(CPACK_PACKAGE_VENDOR              "Andreas Dirmeier")
 set(CPACK_PACKAGE_CONTACT             "coolcow_ccos@yahoo.com")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY   ${CMAKE_INSTALL_PREFIX})
