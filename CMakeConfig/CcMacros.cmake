@@ -49,7 +49,7 @@ MACRO( CcVisualStudioPostFix OutputString DebugRelease StaticShared StaticShared
       SET( VSEXTIONSION_STRING "msvc${MSVC_VERSION}")
     endif()
   else()
-    MESSAGE(WARNING "Correct visual studio version not found, use 2015") 
+    MESSAGE(WARNING "- Correct visual studio version not found, use 2015") 
     SET( VSEXTIONSION_STRING "msvc1900")
   endif()
   
@@ -155,7 +155,7 @@ MACRO( CcLoadWixTools )
   if(NOT EXISTS ${WIX_ZIP_FOLDER})
     # Download File if required
     if( NOT EXISTS ${WIX_ZIP_FILE} )
-      MESSAGE("Download WiX-Toolset: ${DOWNLOAD_URL}")
+      MESSAGE("- Download WiX-Toolset: ${DOWNLOAD_URL}")
       file( DOWNLOAD 
               ${DOWNLOAD_URL} 
               ${WIX_ZIP_FILE}
@@ -163,16 +163,21 @@ MACRO( CcLoadWixTools )
       LIST(GET DOWNLOAD_STATUS 0 NUMERIC_STATUS)
       if(NOT ${NUMERIC_STATUS} EQUAL 0)
         file(REMOVE ${WIX_ZIP_FILE})
-        MESSAGE(FATAL_ERROR "Download result: ${DOWNLOAD_STATUS}")
+        MESSAGE(FATAL_ERROR "- Download result: ${DOWNLOAD_STATUS}")
       else()
-        MESSAGE("Download succeeded")
+        MESSAGE("- Download succeeded")
       endif()    
     endif()   
     file(MAKE_DIRECTORY ${WIX_ZIP_FOLDER})
-    MESSAGE("Extract WiX-Toolset: ${WIX_ZIP_FILENAME}")
+    MESSAGE("- Extract WiX-Toolset: ${WIX_ZIP_FILENAME}")
     execute_process(  COMMAND ${CMAKE_COMMAND} -E tar xf ${WIX_ZIP_FILE}
                       WORKING_DIRECTORY ${WIX_ZIP_FOLDER} )
     file(REMOVE ${WIX_ZIP_FILE})    
   endif()
   set(CPACK_WIX_ROOT                  ${WIX_ZIP_FOLDER})
 ENDMACRO( CcLoadWixTools)
+
+# Avoid CMAKE Warning for Qt defined variable QT_QMAKE_EXECUTABLE
+if(QT_QMAKE_EXECUTABLE)
+  # do nothing just avoid warning
+endif(QT_QMAKE_EXECUTABLE)

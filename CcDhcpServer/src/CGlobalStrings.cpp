@@ -22,52 +22,11 @@
  * @version   0.01
  * @date      2016-04
  * @par       Language   C++ ANSI V3
- * @brief     Implemtation of class CMainApp
+ * @brief     CGlobalStrings
  */
-#include "CMainApp.h"
-#include "CcKernel.h"
-#include "CcConsole.h"
-#include "CcString.h"
-#include "CcDhcpServer.h"
-#include "CcDhcpServerConfigFile.h"
-#include "CcFile.h"
 #include "CGlobalStrings.h"
 
-class CMainAppPrivate
+namespace CGlobalStrings
 {
-public:
-  CcDhcpServer oServer;
-  CcDhcpServerConfigFile oServerConfigFile;
-};
-
-CMainApp::CMainApp()
-{
-  init();
-}
-
-CMainApp::CMainApp(const CcArguments& oArguments) : m_oArguments(oArguments) 
-{
-  init();
-}
-
-CMainApp::~CMainApp()
-{
-  CCDELETE(m_pPrivate);
-}
-
-void CMainApp::run()
-{
-  CCDEBUG("CMainApp::run");
-  m_pPrivate->oServer.exec();
-}
-
-void CMainApp::init()
-{
-  m_pPrivate = new CMainAppPrivate();
-  CCMONITORNEW(m_pPrivate);
-  if (CcFile::exists(CGlobalStrings::ConfigFileName))
-  {
-    m_pPrivate->oServerConfigFile.loadConfigFile(CGlobalStrings::ConfigFileName);
-  }
-   
+  const CcString ConfigFileName("config.xml");
 }

@@ -24,11 +24,15 @@ add_executable( ${CURRENT_PROJECT} ${SOURCE_FILES} )
 SOURCE_GROUP( ""        FILES ${SOURCE_FILES})
 
 target_link_libraries ( ${CURRENT_PROJECT} LINK_PUBLIC
-                              CcKernel  )
+                              CcKernel
+                              CcDhcp
+                              CcTftp
+                              CcDocuments  )
 
                               
 
 #################
 # Post configuration steps
 #################
-CcDhcpServerSetInstall( ${CURRENT_PROJECT} )
+CcDhcpServerTargetIncludeDirs( ${CURRENT_PROJECT} ${CMAKE_CURRENT_SOURCE_DIR})
+CcDhcpServerLibSettings(${CURRENT_PROJECT} TRUE TRUE ${SOURCE_FILES})
