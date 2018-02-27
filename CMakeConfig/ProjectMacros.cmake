@@ -54,9 +54,9 @@ endmacro()
 ################################################################################
 macro( CcDhcpServerTargetIncludeDirs ProjectName )
   foreach(DIR ${ARGN})
-    LIST(APPEND DIRS ${DIR} )
+    list(APPEND DIRS ${DIR} )
     target_include_directories(${ProjectName} PUBLIC $<BUILD_INTERFACE:${DIR}> )
-  ENDFOREACH()
+  endforeach()
   target_include_directories( ${ProjectName} PUBLIC
                                 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
                                 $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include/${ProjectName}> )
@@ -66,9 +66,12 @@ endmacro()
 # Generate RC-File for MSVC Builds, output is a Version.h File in current dir
 ################################################################################
 macro( CcDhcpServerGenerateRcFileToCurrentDir ProjectName )
-  SET(PROJECT_NAME "${ProjectName}")
+  set(PROJECT_NAME "${ProjectName}")
   configure_file( ${CCDHCPSERVER_CMAKECONFIG_DIR}/InputFiles/ProjectVersion.rc.in ${CMAKE_CURRENT_SOURCE_DIR}/CcDhcpServerVersion.rc.tmp @ONLY)
   CcCopyFile(${CMAKE_CURRENT_SOURCE_DIR}/CcDhcpServerVersion.rc.tmp ${CMAKE_CURRENT_SOURCE_DIR}/CcDhcpServerVersion.rc)
+  if(${ARGC} GREATER 1)
+    list(APPEND ${ARGV1} "${CMAKE_CURRENT_SOURCE_DIR}/CcDhcpServerVersion.rc")
+  endif(${ARGC} GREATER 1)
 endmacro()
 
 ################################################################################

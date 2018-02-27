@@ -1,6 +1,7 @@
+################################################################################
 # @Author Andreas Dirmeier
 # @brief Main CMakeList.txt for CcDhcpServer
-#############
+################################################################################
 cmake_minimum_required (VERSION 3.0)
 
 ################################################################################
@@ -23,7 +24,7 @@ project("CcDhcpServer" VERSION "${CCDHCPSERVER_VERSION_CMAKE}")
 # Setup Debug
 ################################################################################
 if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
-  message("Build-Type set to ${CMAKE_BUILD_TYPE}")
+  message("- Build-Type set to ${CMAKE_BUILD_TYPE}")
   set(CCDHCPSERVER_BUILD_TYPE "DEBUG" )
   set(CMAKE_VERBOSE_MAKEFILE          ON)
 else()
@@ -34,26 +35,14 @@ endif()
 ################################################################################
 # Setup Output Paths
 ################################################################################
-# To be able to overwrite global output root use -DCCDHCPSERVER_OUTPUT_DIR=/path on configuration
-if(NOT CCDHCPSERVER_OUTPUT_DIR)
-  set(CCDHCPSERVER_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Output")
+# To be able to overwrite global output root use -DCC_OUTPUT_DIR=/path on configuration
+if(NOT CC_OUTPUT_DIR)
+  set(CC_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Output")
 endif()
 
-# Set runtime output dir to root/output if no other location was defined
-if(NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY)
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CCDHCPSERVER_OUTPUT_DIR}/bin")
-endif()
-
-# Set library output dir to root/output if no other location was defined
-if(NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY)
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CCDHCPSERVER_OUTPUT_DIR}/lib")
-endif()
-
-# Set archive output dir to root/output if no other location was defined
-if(NOT CMAKE_ARCHIVE_OUTPUT_DIRECTORY)
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CCDHCPSERVER_OUTPUT_DIR}/lib/static")
-endif()
-
+################################################################################
+# Setup Default Values for CMAKE
+################################################################################
 CcNoConfigurationDirs()
 enable_testing()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -63,7 +52,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 ################################################################################
 include(CcOSImport.cmake)
 
-ADD_SUBDIRECTORY(CcDhcpServer)
+add_subdirectory(CcDhcpServer)
 
 ################################################################################
 # Update dokumentation
@@ -82,11 +71,11 @@ if(LINUX)
   set(CPACK_GENERATOR "DEB")
   set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_VENDOR})
   
-  INCLUDE(CPack)
+  include(CPack)
 elseif(WINDOWS)
   CcLoadWixTools()
   
   set(CPACK_GENERATOR "WIX")
   set(CPACK_WIX_UPGRADE_GUID "552E2605-4939-4FD9-842C-324CFDB6CCF0")
-  INCLUDE(CPack)
+  include(CPack)
 endif()

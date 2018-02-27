@@ -13,8 +13,7 @@ file (GLOB SOURCE_FILES
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
                      
 if(WINDOWS)
-  CcDhcpServerGenerateRcFileToCurrentDir(${CURRENT_PROJECT})
-  list(APPEND SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/CcDhcpServerVersion.rc")
+  CcDhcpServerGenerateRcFileToCurrentDir(${CURRENT_PROJECT} SOURCE_FILES)
 endif()
 
 add_executable( ${CURRENT_PROJECT} ${SOURCE_FILES} )
